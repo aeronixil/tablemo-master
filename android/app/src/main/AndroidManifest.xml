@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.uplinkautomation.radAR">
+    package="com.uplinkautomation.arhome">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="radAR"
+        android:label="AR Home"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

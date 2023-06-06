@@ -70,7 +70,7 @@ class _LocalAndWebObjectsViewState extends State<LocalAndWebObjectsView> {
                 ),
                 Expanded(
                   child: ElevatedButton(
-                      onPressed: onFileSystemObjectAtOriginButtonPressed,
+                      onPressed: onWebObjectAtButtonPressed2,
                       child: const Text("Sample Floor Plan")),
                 )
               ],
@@ -98,9 +98,9 @@ class _LocalAndWebObjectsViewState extends State<LocalAndWebObjectsView> {
         );
     this.arObjectManager.onInitialize();
 
-    httpClient = new HttpClient();
-    _downloadFile("https://github.com/aeronixil/sandbox/raw/main/lmx2.glb",
-        "tempcachw.glb");
+    // httpClient = new HttpClient();
+    // _downloadFile("https://github.com/aeronixil/sandbox/raw/main/lmx2.glb",
+    //     "tempcachw.glb");
   }
 
   Future<void> onLocalObjectButtonPressed() async {
@@ -119,16 +119,16 @@ class _LocalAndWebObjectsViewState extends State<LocalAndWebObjectsView> {
     }
   }
 
-  Future<File> _downloadFile(String url, String filename) async {
-    var request = await httpClient!.getUrl(Uri.parse(url));
-    var response = await request.close();
-    var bytes = await consolidateHttpClientResponseBytes(response);
-    String dir = (await getApplicationDocumentsDirectory()).path;
-    File file = new File('$dir/$filename');
-    await file.writeAsBytes(bytes);
-    debugPrint("Downloading finished, path: " + '$dir/$filename');
-    return file;
-  }
+  // Future<File> _downloadFile(String url, String filename) async {
+  //   var request = await httpClient!.getUrl(Uri.parse(url));
+  //   var response = await request.close();
+  //   var bytes = await consolidateHttpClientResponseBytes(response);
+  //   String dir = (await getApplicationDocumentsDirectory()).path;
+  //   File file = new File('$dir/$filename');
+  //   await file.writeAsBytes(bytes);
+  //   debugPrint("Downloading finished, path: " + '$dir/$filename');
+  //   return file;
+  // }
 
   // Future<void> onWebObjectAtButtonPressed() async {
   //   if (webObjectNode != null) {
@@ -163,22 +163,22 @@ class _LocalAndWebObjectsViewState extends State<LocalAndWebObjectsView> {
     }
   }
 
-  Future<void> onFileSystemObjectAtOriginButtonPressed() async {
-    if (this.fileSystemNode != null) {
-      this.arObjectManager!.removeNode(this.fileSystemNode!);
-      this.fileSystemNode = null;
-    } else {
-      var newNode = ARNode(
-          type: NodeType.fileSystemAppFolderGLB,
-          uri: "tempcachw.glb",
-          scale: Vector3(0.2, 0.2, 0.2));
-      //Alternative to use type fileSystemAppFolderGLTF2:
-      //var newNode = ARNode(
-      //    type: NodeType.fileSystemAppFolderGLTF2,
-      //    uri: "Chicken_01.gltf",
-      //    scale: Vector3(0.2, 0.2, 0.2));
-      bool? didAddFileSystemNode = await this.arObjectManager!.addNode(newNode);
-      this.fileSystemNode = (didAddFileSystemNode!) ? newNode : null;
-    }
-  }
+  // Future<void> onFileSystemObjectAtOriginButtonPressed() async {
+  //   if (this.fileSystemNode != null) {
+  //     this.arObjectManager!.removeNode(this.fileSystemNode!);
+  //     this.fileSystemNode = null;
+  //   } else {
+  //     var newNode = ARNode(
+  //         type: NodeType.fileSystemAppFolderGLB,
+  //         uri: "tempcachw.glb",
+  //         scale: Vector3(0.2, 0.2, 0.2));
+  //     //Alternative to use type fileSystemAppFolderGLTF2:
+  //     //var newNode = ARNode(
+  //     //    type: NodeType.fileSystemAppFolderGLTF2,
+  //     //    uri: "Chicken_01.gltf",
+  //     //    scale: Vector3(0.2, 0.2, 0.2));
+  //     bool? didAddFileSystemNode = await this.arObjectManager!.addNode(newNode);
+  //     this.fileSystemNode = (didAddFileSystemNode!) ? newNode : null;
+  //   }
+  // }
 }
